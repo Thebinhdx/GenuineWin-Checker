@@ -1,8 +1,8 @@
-<h1 align="center"> GenuineWin-Checker </h1>
+<h1 align="center"> GenuineWinOffice-Checker </h1>
 
-<p align="center"> English: A lightweight Windows License Integrity & Security Auditor written in Batch. Recreates forensic inspection tools to detect KMS, HWID, KMS38, and registry tampering. </p>
+<p align="center"> English: A tool for scanning and assessing the integrity of Windows and Office licenses using Batch. Replicates the methods used to detect KMS, HWID, KMS38, Ohook cracks and system tampering. </p>
 
-<p align="center"> Vietnamese: Công cụ quét và đánh giá tính toàn vẹn bản quyền Windows bằng Batch. Tái hiện phương pháp giám định phát hiện vết bẻ khóa KMS, HWID, KMS38 và can thiệp hệ thống. </p>
+<p align="center"> Vietnamese: Công cụ quét và đánh giá tính toàn vẹn bản quyền Windows và Office bằng Batch. Tái hiện phương pháp giám định phát hiện vết bẻ khóa KMS, HWID, KMS38, Ohook và can thiệp hệ thống. </p>
 
 <hr>
 
