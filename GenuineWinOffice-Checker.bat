@@ -39,7 +39,7 @@ echo Checking Administrator Requirements...
 
 net session >nul 2>&1
 if %errorlevel% == 0 (
-  goto continue
+  goto check_product
 ) else (
   cls
   call :dk_color %Red% "===Error==="
@@ -47,21 +47,6 @@ if %errorlevel% == 0 (
   echo Press Any Key to Exit...
   pause >nul
   exit /b 1
-)
-
-:continue
-
-set "%errorlevel%= "
-ping -n 1 google.com >nul 2>&1
-if errorlevel 1 (
-    cls
-    call :dk_color %Red% "===Error==="
-    echo Can't connect to Internet. Please check your connection.
-    echo Error Code: 404
-    echo:
-    echo Press any key to exit...
-    pause >nul
-    exit /b 1
 )
 
 :check_product
