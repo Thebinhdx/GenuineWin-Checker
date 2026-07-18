@@ -420,11 +420,14 @@ if /i "%bios%"=="true" (
     call :dk_color %_Red% "[-] Key not matching detected."
     call :dk_color %_Red% "[-] Phat hien key khong trung khop."
 ) else if /i "%bios%"=="unknown" (
-    call :dk_color %_Green% "[ ] BIOS key not found."
-    call :dk_color %_Green% "[ ] Khong tim thay key BIOS."
-) else (
+    call :dk_color %_Yellow% "[ ] BIOS key not found."
+    call :dk_color %_Yellow% "[ ] Khong tim thay key BIOS."
+) else if /i "%bios%"=="upgrade" (
     call :dk_color %Blue% "[i] Upgrade key detected but lacks a valid digital entitlement."
     call :dk_color %Blue% "[i] Key nang cap duoc phat hien nhung thieu giay phep so hop le."
+) else (
+    call :dk_color %_Green% "[+] BIOS Key matches."
+    call :dk_color %_Green% "[+] BIOS Key trung khop."
 )
 
 echo:
