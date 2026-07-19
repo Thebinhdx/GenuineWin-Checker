@@ -20,6 +20,20 @@
 > The software's conclusions are not always accurate, so double-check carefully before concluding.
 >
 > *Kết luận của phần mềm không đảm bảo lúc nào cũng đúng nên kiểm tra lại cẩn thận trước khi kết luận.*
+
+---
+
+### 🕵️‍♀️ Currently detectable activation methods / Những phương pháp kích hoạt có thể phát hiện hiện tại
+
+| Activation methods / Các cách kích hoạt | Support detection / Hỗ trợ phát hiện |
+| :--- | :--- |
+| Online KMS | ✅ |
+| KMS38 | ✅ |
+| HWID (Massgrave) | ✅ |
+| Ohook (Massgrave) | ✅ (Above V1.2 / V1.2 trở lên) |
+| TSforge (Massgrave) | ❌ (Currently under development / Đang trong quá trình phát triển) |
+| Modifying registry files, altering files, incorrect logic, OEM key, ... | 🟨 (It is still basically under further development / Vẫn còn cơ bản đang phát triển thêm) |
+
 ---
 
 ### ❓ FAQ / Câu hỏi thường gặp
@@ -38,15 +52,3 @@
 2. **Review Code:** We highly encourage you to review the raw code here on GitHub to verify its complete safety. *(Chúng tôi khuyến khích bạn tự xem lại toàn bộ mã nguồn công khai ngay tại đây để tự kiểm chứng).*
 
 ---
-
-### 🕵️‍♀️ Currently detectable activation methods / Những phương pháp kích hoạt có thể phát hiện hiện tại
-
-| Activation methods / Các cách kích hoạt | Support detection / Hỗ trợ phát hiện |
-| :--- | :--- |
-| Online KMS | ✅ |
-| KMS38 | ✅ |
-| HWID (Massgrave) | ✅ |
-| Ohook (Massgrave) | ✅ (Above V1.2 / V1.2 trở lên) |
-| TSforge (Massgrave) | ❌ (Currently under development / Đang trong quá trình phát triển) |
-| Modifying registry files, altering files, incorrect logic, OEM key, ... | 🟨 (It is still basically under further development / Vẫn còn cơ bản đang phát triển thêm) |
-
