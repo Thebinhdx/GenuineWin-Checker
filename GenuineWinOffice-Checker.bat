@@ -1,5 +1,8 @@
 @echo off
 
+set "namebatch=GenuineWinOffice-Checker"
+set "versionbatch=v1.2.2"
+
 setlocal EnableDelayedExpansion
 
 for /f "tokens=6 delims=[]. " %%a in ('ver') do set /a winbuild=%%a
@@ -39,7 +42,7 @@ echo Checking Administrator Requirements...
 
 net session >nul 2>&1
 if %errorlevel% == 0 (
-  goto check_product
+  goto continue
 ) else (
   cls
   call :dk_color %Red% "===Error==="
@@ -48,6 +51,21 @@ if %errorlevel% == 0 (
   pause >nul
   exit /b 1
 )
+
+:continue
+cls
+if %winbuild% LSS 19043 (
+%eline%
+call :dk_color %Red% "===Error==="
+echo Unsupported OS version detected [%winbuild%].
+echo Error Code: 1207
+echo:
+call :dk_color %Blue% "Only supported on Windows 10 [21H1]/11."
+echo Press Any Key to Exit...
+pause >nul
+exit /b 1
+)
+
 
 :check_product
 cls
@@ -132,6 +150,7 @@ for /f "delims=" %%A in ('powershell -Command "[timezone]::CurrentTimeZone.ToLoc
 set "TIME=%Install_Date%"
 
 cls
+title GenuineWinOffice-Checker
 mode 150,50
 echo ===================-Computer Information / Thong tin may:-===================
 echo:
@@ -153,7 +172,9 @@ echo:
 echo Installed On / Thoi gian cai dat: %TIME%
 echo:
 echo =============================================================================
-
+echo Name: %namebatch%
+echo Version: %versionbatch%
+echo:
 echo Deep Scanning will start in 5 seconds / Kiem tra sau se bat dau sau 5 giay...
 timeout /t 5 /nobreak >nul
 
@@ -213,13 +234,26 @@ if %errorlevel% equ 0 (
         )
     )
 )
-echo Checking KMS38/HWID. / Kiem tra KMS38/HWID.
+echo Checking KMS38. / Kiem tra KMS38.
+call :dk_color %_Yellow% "In Windows Build 26100.7019, Microsoft removed several features that caused KMS38 to stop working."
+
+if %winbuild% GEQ 26100.7019 (
+%eline%
+call :dk_color %Blue% "[i] Your OS version not support KMS38 activation."
+set "KMS38=not_supported"
+goto skip_kms38
+)
+
 set "KMS38=unknown"
 for /f "tokens=*" %%T in ('cscript //nologo %systemroot%\system32\slmgr.vbs /xpr 2^>nul') do set "expire_info=%%T"
 echo !expire_info! | findstr /i "2038" >nul
 if %errorlevel% equ 0 (
     set "KMS38=true"
 )
+
+:skip_kms38
+
+echo Checking HWID. / Kiem tra HWID.
 
 set "hwid=unknown"
 set "current_partial_key="
@@ -228,7 +262,7 @@ for /f "tokens=2 delims=:" %%A in ('cscript //nologo %systemroot%\system32\slmgr
     set "current_partial_key=!temp_key: =!"
 )
 
-set "generic_keys=T83GX 3V66T 2YT43 8HVX7 H8Q99 4398T YYVX2 6F377 DBX9C M269M MT396 6C8CH 3GH72 R3VYY QFF9Y 27GXM 4CP9G"
+set "generic_keys=7CFBY DRR8H 8HV2C QPFCT MDWWW DYJWX P39PB M7V2X 9HKR4 8HVX7 WXCHW 8TYMD 6F4BT CKFFD RRK69 YY74H J8JXD D32MH 3V66T PKCKT MHBPB QPF8P 2YV77 WT2RQ VMJ2C DJ4F6 T6R4W BHDCD KD72Y"
 
 set "is_hwid_mas=0"
 if defined current_partial_key (
@@ -521,9 +555,11 @@ echo:
 if /i "%KMS38%"=="true" (
     call :dk_color %_Red% "[-] Traces of activation of a pirated KMS38 server have been detected."
     call :dk_color %_Red% "[-] Phat hien dau vet kich hoat may chu KMS38 lau."
-) else (
+) else if /i "%KMS38%"=="unknown" (
     call :dk_color %_Green% "[+] No traces of pirated KMS38 were detected."
     call :dk_color %_Green% "[+] Ko phat hien dau vet KMS38 lau."
+) else if /i "%KMS38%"=="not_supported" (
+    call :dk_color %_Yellow% "[ ] Your OS version is not supported."
 )
 
 echo:
